@@ -43,7 +43,7 @@ jobs:
           password: ${{ secrets.GIT_AUTH_TOKEN  }}
             
       - name: Build and push
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v5
         with:
           context: .
           push: ${{ github.event_name != 'pull_request' }}
