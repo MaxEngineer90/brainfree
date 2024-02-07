@@ -1,0 +1,17 @@
+###
+# group: login
+# @name keycloak
+POST {{kc-url}}
+Content-Type: application/x-www-form-urlencoded
+
+client_id={{client_id}} &
+client_secret={{client_secret}} &
+grant_type= {{grant_type}} &
+username={{username}} &
+password={{password}}
+
+> {%
+client.assert(response.status === 200, "Result is OK")
+client.global.set("access_token", JSON.parse(JSON.stringify(response.body)).access_token);
+ %}
+

@@ -1,0 +1,34 @@
+version: 2
+
+updates:
+  - package-ecosystem: "maven"
+    directory: "/" # Location of package manifests
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "maven"
+    directory: "./brainfree_logic/" # Location of package manifests
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "maven"
+    directory: "./brainfree_model/" # Location of package manifests
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "maven"
+    directory: "./brainfree_rest/" # Location of package manifests
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "github-actions"
+    # Workflow files stored in the default location of `.github/workflows`
+    directory: "/"
+    schedule:
+      interval: "weekly"
+
+  - package-ecosystem: "docker"
+    directory: "/"
+
+    schedule:
+      interval: "weekly"

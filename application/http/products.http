@@ -1,0 +1,4 @@
+###GET all products
+GET {{host}}/products
+Accept: application/json
+Authorization: Bearer {{access_token}}

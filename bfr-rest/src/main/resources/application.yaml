@@ -1,0 +1,45 @@
+rest:
+  base-path: /api/v1
+server:
+  servlet:
+    context-path: /brainfree
+  port: '8087'
+
+spring:
+  application:
+    name: brainfree
+  banner:
+    location: banner.txt
+  data:
+    rest:
+      detection-strategy: annotated
+
+  datasource:
+    hikari:
+      connection-timeout: '10000'
+    password: 123#qwer
+    driver-class-name: org.postgresql.Driver
+    username: docker
+    url: jdbc:postgresql://localhost:5432/brainfree_dev_db?useLegacyDatetimeCode=false&serverTimezone=CET
+
+  jpa:
+    generate-ddl: 'false'
+    database: postgresql
+    hibernate:
+      ddl-auto: none
+    show-sql: 'false'
+    open-in-view: 'false'
+    properties:
+      hibernate:
+        format_sql: 'true'
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+
+  liquibase:
+    changeLog: classpath:db.changelog/db.changelog-master.xml
+    enabled: 'true'
+
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: ${ISSUER_URL:http://localhost:8080/realms/brainfree}

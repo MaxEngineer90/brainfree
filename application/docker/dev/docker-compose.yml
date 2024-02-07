@@ -1,0 +1,77 @@
+version: '3.9'
+
+networks:
+  keycloak-brainfree:
+
+services:
+
+  keycloak_dev:
+    container_name: keycloak_dev
+    image: quay.io/keycloak/keycloak:22.0.1
+    environment:
+      - DB_VENDOR=postgres
+      - DB_ADDR=keycloak_dev_db
+      - DB_DATABASE=keycloak
+      - DB_SCHEMA=public
+      - DB_USER=keycloak
+      - DB_PASSWORD=changeMe
+      - KC_HOSTNAME=localhost
+      - ROOT_LOGLEVEL=DEBUG
+      - REDIRECT_SOCKET=proxy-https
+      - KC_LOGLEVEL=DEBUG
+      - KEYCLOAK_ADMIN=admin
+      - KEYCLOAK_ADMIN_PASSWORD=Pa55w0rd
+      - KEYCLOAK_IMPORT=/imports/realm-export.json
+    volumes:
+      - ./config/:/opt/keycloak/data/import:ro
+    entrypoint:
+      ["/opt/keycloak/bin/kc.sh", "start-dev", "--import-realm"]
+    ports:
+      - "8080:8080"
+    depends_on:
+      - keycloak_dev_db
+    networks:
+      - keycloak-brainfree
+    restart: on-failure
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8080/auth" ]
+      interval: 300s
+      timeout: 10s
+      retries: 5
+
+  keycloak_dev_db:
+    container_name: keycloak_dev_db
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: changeMe
+    networks:
+      - keycloak-brainfree
+    restart: on-failure
+    healthcheck:
+      test: [ 'CMD-SHELL', 'pg_isready -U keycloak -d keycloak' ]
+      interval: 300s
+      timeout: 5s
+      retries: 5
+
+
+  brainfree_dev_db:
+    container_name: brainfree_dev_db
+    image: postgres:15-alpine
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_DB=brainfree_dev_db
+      - POSTGRES_USER=docker
+      - POSTGRES_PASSWORD=123#qwer
+      - POSTGRES_MULTIPLE_EXTENSIONS=postgis,hstore,postgis_topology,postgis_raster,pgrouting
+    volumes:
+      - ../sql/create_product_table.sql:/docker-entrypoint-initdb.d/create_product_table.sql
+      - ../sql/insert_products.sql:/docker-entrypoint-initdb.d/insert_products.sql
+    restart: on-failure
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U docker -d brainfree_dev_db" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3

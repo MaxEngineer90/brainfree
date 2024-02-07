@@ -1,0 +1,65 @@
+{
+  "root": "libs/navigation/",
+  "name": "navigation",
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/navigation/src",
+  "prefix": "bfr",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": [
+        "{workspaceRoot}/dist/{projectRoot}"
+      ],
+      "options": {
+        "allowedCommonJsDependencies": [
+          "lodash"
+        ],
+        "assets": [
+          "libs/navigation/assets"
+        ],
+        "project": "libs/navigation/ng-package.json",
+        "tailwindConfig": "libs/navigation/tailwind.config.js"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "libs/navigation/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "libs/navigation/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": [
+        "{workspaceRoot}/coverage/{projectRoot}"
+      ],
+      "options": {
+        "jestConfig": "libs/navigation/jest.config.ts",
+        "passWithNoTests": true
+      },
+      "configurations": {
+        "ci": {
+          "ci": true,
+          "codeCoverage": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": [
+        "{options.outputFile}"
+      ],
+      "options": {
+        "lintFilePatterns": [
+          "libs/navigation/**/*.ts",
+          "libs/navigation/**/*.html",
+          "libs/navigation/package.json"
+        ]
+      }
+    }
+  }
+}

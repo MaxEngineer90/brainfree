@@ -1,0 +1,8 @@
+{
+  "/brainfree": {
+    "target": "http://localhost:8087/brainfree/api/v1/",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "info"
+  }
+}

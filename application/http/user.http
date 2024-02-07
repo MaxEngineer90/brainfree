@@ -1,0 +1,4 @@
+### Get User information
+GET {{host}}/users/user
+Accept: application/json
+Authorization: Bearer {{access_token}}

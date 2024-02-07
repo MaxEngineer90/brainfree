@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::ng-deep .mat-mdc-menu-content {
+  padding: 0 !important;
+}
+
+.menu-top-container {
+  height: 4rem;
+  padding-top: 1rem;
+}
+
+.edit-container {
+  text-align: right;
+  padding-right: 1rem;
+
+  .edit-icon {
+    color: #bbbaba;
+    height: auto;
+    width: 1rem;
+    font-size: 15px;
+
+    &:hover {
+      color: white;
+      border-radius: 20rem;
+      background-color: #bbbaba;
+    }
+  }
+}
+
+.first-letter-menu {
+  text-align: center;
+  margin-top: -1.5rem;
+  margin-bottom: 1rem;
+}
+
+.btn-first-letter {
+  border: 1px solid white;
+}

@@ -1,0 +1,9 @@
+###Get SHOPPING_CART
+GET {{host}}/carts/shopping-cart
+Accept: application/json
+Authorization: Bearer {{access_token}}
+
+### Create cart
+POST {{host}}/carts/
+Accept: application/json
+Authorization: Bearer {{access_token}}

@@ -1,0 +1,42 @@
+<mat-toolbar
+  class="bg-primary flex justify-between"
+  xmlns="http://www.w3.org/1999/html"
+>
+  <div class="text-white"><span>brainfree</span></div>
+  <div>
+    <button
+      mat-mini-fab
+      [matMenuTriggerFor]="menu"
+      class="text-md text-white bg-amber-600"
+    >
+      {{ firstLetterFromName }}
+    </button>
+  </div>
+</mat-toolbar>
+<mat-menu #menu="matMenu" class="w-16">
+  <div class="bg-gray-200 menu-top-container">
+    <div class="pl-5 pr-5">
+      <span>{{ fullName }}</span>
+    </div>
+    <div class="edit-container">
+      <mat-icon class="edit-icon">edit</mat-icon>
+    </div>
+  </div>
+  <div class="first-letter-menu">
+    <button mat-fab class="text-md text-white bg-amber-600 btn-first-letter">
+      {{ firstLetterFromName }}
+    </button>
+  </div>
+  <!--entries-->
+  <div>
+    <button mat-menu-item (click)="openAccount()" class="pl-5 pr-5">
+      <mat-icon>settings</mat-icon>
+      account settings
+    </button>
+
+    <button mat-menu-item (click)="logout()" class="pl-5 pr-5">
+      <mat-icon class="text-red">logout</mat-icon>
+      logout
+    </button>
+  </div>
+</mat-menu>
