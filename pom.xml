@@ -153,7 +153,7 @@
             <dependency>
                 <groupId>com.c4-soft.springaddons</groupId>
                 <artifactId>spring-security-oauth2-test-addons</artifactId>
-                <version>2.4.1</version>
+                <version>4.5.1</version>
             </dependency>
             <dependency>
                 <groupId>org.mapstruct</groupId>
